@@ -13,6 +13,7 @@
       --accent1:#6ee7b7;
       --accent2:#60a5fa;
       --accent3:#c084fc;
+      --accent4:#f87171;
       --glass: rgba(255,255,255,0.04);
       --glass-2: rgba(255,255,255,0.02);
       --glass-border: rgba(255,255,255,0.06);
@@ -55,7 +56,226 @@
     .hero-stat .big{font-size:28px;font-weight:800}
     .hero-stat .sub{color:var(--muted);font-size:13px}
 
-    /* NEW: Displaced Regions Section */
+    /* NEW: Death Rates Section */
+    .death-rates {
+      grid-column: 1 / span 12;
+      margin-top: 24px;
+      padding: 24px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(248, 113, 113, 0.05), rgba(248, 113, 113, 0.02));
+      border: 1px solid rgba(248, 113, 113, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .death-rates::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent4), transparent);
+    }
+    .death-rates h2 {
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .death-rates h2::before {
+      content: '⚰️';
+      font-size: 18px;
+    }
+    
+    /* Death Summary Cards */
+    .death-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .death-summary-card {
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .death-summary-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .death-summary-card:hover {
+      transform: translateY(-5px);
+      background: rgba(248, 113, 113, 0.08);
+      border-color: rgba(248, 113, 113, 0.2);
+    }
+    .death-summary-card h3 {
+      margin: 0 0 12px 0;
+      font-size: 16px;
+      color: var(--accent4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .death-summary-card h3::before {
+      content: '▸';
+      font-size: 12px;
+    }
+    .death-summary-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    /* Death Stats Cards */
+    .death-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .death-stat-card {
+      padding: 18px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .death-stat-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .death-stat-card:hover {
+      transform: translateY(-5px);
+      background: rgba(248, 113, 113, 0.08);
+      border-color: rgba(248, 113, 113, 0.2);
+    }
+    .death-stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent4), #fca5a5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+      line-height: 1;
+    }
+    .death-stat-label {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .death-stat-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.4;
+    }
+    
+    /* Key Statistics Grid */
+    .key-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .key-stat {
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.5s ease-out;
+    }
+    .key-stat.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .key-stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent4);
+      margin-bottom: 4px;
+    }
+    .key-stat-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    
+    /* Timeline Section */
+    .death-timeline {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      border-left: 3px solid var(--accent4);
+    }
+    .death-timeline h3 {
+      margin: 0 0 16px 0;
+      color: var(--accent4);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .death-timeline h3::before {
+      content: '📅';
+      font-size: 14px;
+    }
+    .timeline-item {
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.5s ease-out;
+    }
+    .timeline-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .timeline-date {
+      font-size: 12px;
+      color: var(--accent4);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.4;
+    }
+    
+    /* Civilian Impact Highlight */
+    .civilian-impact {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(248, 113, 113, 0.08);
+      border-radius: 10px;
+      border: 1px solid rgba(248, 113, 113, 0.2);
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .civilian-impact strong {
+      color: var(--accent4);
+    }
+
+    /* Displaced Regions Section */
     .displaced-regions {
       grid-column: 1 / span 12;
       margin-top: 24px;
@@ -177,6 +397,9 @@
       .sections{grid-template-columns:1fr}
       .hero-stat{flex-direction:column;gap:8px;align-items:flex-start}
       .region-grid{grid-template-columns:repeat(2,1fr)}
+      .death-stats-grid,
+      .death-summary-grid,
+      .key-stats-grid{grid-template-columns:1fr}
     }
     @media (max-width:600px){
       .region-grid{grid-template-columns:1fr}
@@ -273,39 +496,8 @@
         </div>
       </div>
 
-      <div class="sections" style="grid-column:1 / span 12">
-        <div class="card fade-up" data-ro="true">
-          <h4>Economic Loss & Infrastructure</h4>
-          <ul>
-            <li>US $5.1 billion in economic losses (Oct 2023–Oct 2024).</li>
-            <li>US $3.4 billion in physical infrastructure damage.</li>
-            <li>Combined impact ≈ US $8.5 billion.</li>
-            <li>Housing: >99,000 units damaged; cost ≈ US $2.8 billion.</li>
-            <li>Real GDP contracted by at least 6.6% in 2024.</li>
-          </ul>
-        </div>
 
-        <div class="card fade-up" data-ro="true">
-          <h4>Sector-Specific Damage</h4>
-          <ul>
-            <li>Agriculture: farmland, crops, and livestock destroyed (south hardest hit).</li>
-            <li>Commerce: 14,748 business units damaged; many shops closed.</li>
-            <li>Tourism: major collapse near conflict areas.</li>
-            <li>Employment: private sector -~25% overall; ~36% in hardest-hit regions.</li>
-          </ul>
-        </div>
-
-        <div class="card fade-up" data-ro="true">
-          <h4>Food Insecurity & Social Impact</h4>
-          <ul>
-            <li>Food insecurity increased due to agricultural loss and supply disruptions.</li>
-            <li>Loss of livelihoods in agriculture, tourism, and commerce; unemployment spiked.</li>
-            <li>Social disruption: displacement, damaged schools used as shelters, strained community structures.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- NEW: Displaced People by Region Section -->
+      <!-- Displaced People by Region Section -->
       <div class="displaced-regions fade-up" data-ro="true">
         <h2>Displaced Population by Region (Spring 2025)</h2>
         
@@ -336,10 +528,85 @@
         </div>
       </div>
 
+      <!-- NEW: Death Rates & Casualties Section -->
+      <div class="death-rates fade-up" data-ro="true">
+        <h2>Casualties & Death Rates</h2>
+        
+        <!-- Key Statistics -->
+        <div class="key-stats-grid" id="death-key-stats">
+          <!-- Populated by JavaScript -->
+        </div>
+        
+        <!-- Summary Cards -->
+        <div class="death-summary-grid">
+          <div class="death-summary-card" id="card-lebanon">
+            <h3>Lebanon Casualties</h3>
+            <p>Lebanese government reports 2,720 people killed by Israel, mostly civilians. By mid-November 2024, Lebanon's Ministry of Public Health reported 3,583 total deaths, including 231 children. UNICEF confirms over 200 children killed.</p>
+          </div>
+          
+          <div class="death-summary-card" id="card-israel">
+            <h3>Israeli Military Losses</h3>
+            <p>Israel reports 56 Israeli soldiers killed overall, with 9 killed in combat in southern Lebanon. 30 soldiers were wounded, 7 seriously. Hezbollah claims destroying 3 Israeli Merkava tanks and killing/wounding at least 20 elite Israeli soldiers.</p>
+          </div>
+          
+          <div class="death-summary-card" id="card-hezbollah">
+            <h3>Hezbollah Casualties</h3>
+            <p>Israel reports 2,762 Hezbollah militants killed. Hezbollah leader reports 5,000 fighters killed and 13,000 wounded. In the pager explosions, 1,500 fighters were incapacitated, many blinded or lost hands. IDF claims 250+ fighters killed in south Lebanon.</p>
+          </div>
+        </div>
+        
+        <!-- Detailed Statistics -->
+        <div class="death-stats-grid">
+          <div class="death-stat-card" id="stat-sept">
+            <div class="death-stat-value" data-value="42">0</div>
+            <div class="death-stat-label">Killed in Pager Explosions</div>
+            <div class="death-stat-desc">Sept 17-18: Thousands of Hezbollah pagers/walkie-talkies exploded in coordinated attacks, injuring 3,500+ including civilians.</div>
+          </div>
+          
+          <div class="death-stat-card" id="stat-sept-week">
+            <div class="death-stat-value" data-value="800">0</div>
+            <div class="death-stat-label">Killed in First Week of Strikes</div>
+            <div class="death-stat-desc">Sept 23 onwards: IDF airstrikes killed 800+ people in first week, with 5,000+ injured during same period.</div>
+          </div>
+          
+          <div class="death-stat-card" id="stat-health">
+            <div class="death-stat-value" data-value="40">0</div>
+            <div class="death-stat-label">Paramedics & Firefighters Killed</div>
+            <div class="death-stat-desc">Over 3 days: Lebanese Health Minister reported 40 emergency personnel killed, including Hezbollah-affiliated groups.</div>
+          </div>
+        </div>
+        
+        <!-- Timeline of Major Events -->
+        <div class="death-timeline">
+          <h3>Timeline of Major Casualty Events</h3>
+          <div class="timeline-item" id="timeline-1">
+            <div class="timeline-date">Mid-September 2024</div>
+            <div class="timeline-desc">Israeli strikes on Lebanon killed at least 2,267 people and injured 11,022 (CNN tally).</div>
+          </div>
+          <div class="timeline-item" id="timeline-2">
+            <div class="timeline-date">September 17-18, 2024</div>
+            <div class="timeline-desc">Coordinated pager/walkie-talkie explosions killed 42, injured 3,500+, incapacitated 1,500 Hezbollah fighters.</div>
+          </div>
+          <div class="timeline-item" id="timeline-3">
+            <div class="timeline-date">September 23, 2024</div>
+            <div class="timeline-desc">IDF airstrikes began, killing 800+ in first week, injuring 5,000+.</div>
+          </div>
+          <div class="timeline-item" id="timeline-4">
+            <div class="timeline-date">Recent Attacks</div>
+            <div class="timeline-desc">Four health workers killed in Israeli drone strike near Marjayoun hospital. WHO reported 28 healthcare workers killed in past 24 hours.</div>
+          </div>
+        </div>
+        
+        <!-- Civilian Impact -->
+        <div class="civilian-impact">
+          <strong>Civilian Impact:</strong> The Lebanese Health Ministry states that most Lebanese killed by Israel are civilians. The conflict has resulted in significant loss of emergency and healthcare personnel, with multiple attacks on medical facilities and personnel.
+        </div>
+      </div>
+
     </div>
 
     <footer class="fade-up" data-ro="true">
-      Data sources: IOM, DTM, World Bank, UN agencies, UNDP, UNESCWA, OCHA. (Summary for web presentation.)
+      Data sources: IOM, DTM, World Bank, UN agencies, UNDP, UNESCWA, OCHA, Lebanese Ministry of Health, IDF reports, Hezbollah statements, CNN. (Summary for web presentation.)
     </footer>
   </div>
 
@@ -354,7 +621,7 @@
       aprilRemaining: 90000,
       springReturned: 970000,
       
-      // New displaced people data by region
+      // Displaced people data by region
       displacedByRegion: [
         // South Lebanon
         { region: "Saida", value: 13685, group: "south" },
@@ -376,7 +643,31 @@
         { region: "Al Metn", value: 4385, group: "other" },
         { region: "Baabda", value: 3081, group: "other" },
         { region: "Aley", value: 8633, group: "other" }
-      ]
+      ],
+      
+      // Death rates data
+      deathRates: {
+        israeliSoldiers: 56,
+        hezbollahReportedByIsrael: 2762,
+        lebaneseCivilians: 2720,
+        pagerExplosionDeaths: 42,
+        pagerExplosionInjured: 3500,
+        pagerFightersIncapacitated: 1500,
+        firstWeekDeaths: 800,
+        firstWeekInjured: 5000,
+        recentIsraeliSoldiers: 9,
+        recentHezbollahClaims: 20,
+        healthWorkers24h: 28,
+        paramedics3days: 40,
+        healthWorkersMarjayoun: 4,
+        hezbollahFieldCommanders: 21,
+        midSeptDeaths: 2267,
+        midSeptInjured: 11022,
+        midNovDeaths: 3583,
+        childrenKilled: 231,
+        hezbollahSelfReportedKilled: 5000,
+        hezbollahSelfReportedWounded: 13000
+      }
     }
 
     // Simple count-up function
@@ -429,6 +720,29 @@
       // Set total displaced
       document.getElementById('total-displaced').textContent = totalDisplaced.toLocaleString();
     }
+    
+    // Function to create key death statistics
+    function createDeathKeyStats() {
+      const container = document.getElementById('death-key-stats');
+      const keyStats = [
+        { value: DATA.deathRates.midNovDeaths, label: "Total Deaths in Lebanon" },
+        { value: DATA.deathRates.israeliSoldiers, label: "Israeli Soldiers Killed" },
+        { value: DATA.deathRates.hezbollahSelfReportedKilled, label: "Hezbollah Fighters Killed" },
+        { value: DATA.deathRates.childrenKilled, label: "Children Killed" },
+        { value: DATA.deathRates.midSeptInjured + DATA.deathRates.firstWeekInjured + DATA.deathRates.pagerExplosionInjured, label: "Total Reported Injuries" },
+        { value: DATA.deathRates.paramedics3days + DATA.deathRates.healthWorkers24h + DATA.deathRates.healthWorkersMarjayoun, label: "Emergency Personnel Killed" }
+      ];
+      
+      keyStats.forEach(stat => {
+        const statEl = document.createElement('div');
+        statEl.className = 'key-stat';
+        statEl.innerHTML = `
+          <div class="key-stat-value" data-value="${stat.value}">0</div>
+          <div class="key-stat-label">${stat.label}</div>
+        `;
+        container.appendChild(statEl);
+      });
+    }
 
     // Animate region cards with staggered delay
     function animateRegionCards() {
@@ -446,6 +760,51 @@
         }, 100 + (index * 80)); // 80ms delay between each card
       });
     }
+    
+    // Animate death rates section
+    function animateDeathRates() {
+      // Animate summary cards
+      const summaryCards = document.querySelectorAll('.death-summary-card');
+      summaryCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, 200 + (index * 200));
+      });
+      
+      // Animate stat cards with numbers
+      const statCards = document.querySelectorAll('.death-stat-card');
+      statCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('visible');
+          
+          // Animate the number
+          const valueEl = card.querySelector('.death-stat-value');
+          const value = parseInt(valueEl.getAttribute('data-value'));
+          countUp(valueEl, value, 1200);
+        }, 600 + (index * 300));
+      });
+      
+      // Animate key stats
+      const keyStats = document.querySelectorAll('.key-stat');
+      keyStats.forEach((stat, index) => {
+        setTimeout(() => {
+          stat.classList.add('visible');
+          
+          // Animate the number
+          const valueEl = stat.querySelector('.key-stat-value');
+          const value = parseInt(valueEl.getAttribute('data-value'));
+          countUp(valueEl, value, 1000);
+        }, 800 + (index * 150));
+      });
+      
+      // Animate timeline items
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      timelineItems.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('visible');
+        }, 1000 + (index * 200));
+      });
+    }
 
     // populate elements
     document.getElementById('early-jan-return').textContent = '0';
@@ -458,8 +817,9 @@
     document.getElementById('num-displaced').textContent = '0';
     document.getElementById('spring-return').textContent = '0';
     
-    // Create region cards
+    // Create region cards and death stats
     createRegionCards();
+    createDeathKeyStats();
 
     // IntersectionObserver to reveal and animate when in view
     const io = new IntersectionObserver((entries)=>{
@@ -485,6 +845,11 @@
             // When displaced regions section appears
             if(el.classList.contains('displaced-regions')) {
               setTimeout(animateRegionCards, 300);
+            }
+            
+            // When death rates section appears
+            if(el.classList.contains('death-rates')) {
+              setTimeout(animateDeathRates, 300);
             }
           }
           io.unobserve(el);
