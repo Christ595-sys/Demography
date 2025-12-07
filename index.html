@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lebanon — Conflict Impact Summary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#9aa8b6;
+      --accent1:#6ee7b7;
+      --accent2:#60a5fa;
+      --accent3:#c084fc;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --glass-border: rgba(255,255,255,0.06);
+      --radius: 16px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg) 0%, #071024 100%);color:#e6eef6}
+    .container{max-width:1100px;margin:48px auto;padding:28px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;font-weight:800;color:#012;padding:6px;font-size:18px}
+    h1{margin:0;font-size:24px;letter-spacing:-0.3px}
+    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:22px}
+
+    /* Stats */
+    .stats{grid-column:1 / span 5;padding:18px;background:linear-gradient(180deg,var(--glass),var(--glass-2));border:1px solid var(--glass-border);border-radius:var(--radius)}
+    .stat{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+    .stat:last-child{border-bottom:0}
+    .stat .num{font-size:20px;font-weight:700}
+    .stat .label{color:var(--muted);font-size:13px}
+
+    .chart{grid-column:6 / span 7;padding:20px;border-radius:var(--radius);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .timeline{display:flex;flex-direction:column;gap:14px}
+    .time-card{padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.015), transparent);border:1px solid rgba(255,255,255,0.02)}
+    .time-card h3{margin:0;font-size:15px}
+    .time-card p{margin:6px 0 0;color:var(--muted);font-size:13px}
+
+    /* Sections */
+    .sections{grid-column:1 / span 12;margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .card h4{margin:0 0 8px}
+    .card ul{margin:0;padding-left:18px;color:var(--muted)}
+
+    /* big stat banner */
+    .hero-stat{grid-column:1 / span 12;display:flex;align-items:center;justify-content:space-between;padding:18px;border-radius:14px;background:linear-gradient(90deg, rgba(96,165,250,0.08), rgba(110,231,183,0.05));border:1px solid rgba(255,255,255,0.03);margin-top:14px}
+    .hero-stat .big{font-size:28px;font-weight:800}
+    .hero-stat .sub{color:var(--muted);font-size:13px}
+
+    /* NEW: Displaced Regions Section */
+    .displaced-regions {
+      grid-column: 1 / span 12;
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(192, 132, 252, 0.05), rgba(192, 132, 252, 0.02));
+      border: 1px solid rgba(192, 132, 252, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .displaced-regions::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent3), transparent);
+    }
+    .displaced-regions h2 {
+      margin: 0 0 16px 0;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .displaced-regions h2::before {
+      content: '📍';
+      font-size: 16px;
+    }
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .region-card {
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .region-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .region-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(192, 132, 252, 0.2);
+    }
+    .region-name {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .region-name::before {
+      content: '▸';
+      color: var(--accent3);
+      font-size: 10px;
+    }
+    .region-value {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent3), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    .region-total {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.05);
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .total-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent3);
+      margin-top: 4px;
+    }
+
+    /* Region groups */
+    .region-group {
+      margin-bottom: 20px;
+    }
+    .region-group-title {
+      font-size: 14px;
+      color: var(--accent2);
+      margin-bottom: 10px;
+      padding-left: 8px;
+      border-left: 3px solid var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Animations */
+    .fade-up{opacity:0;transform:translateY(12px);transition:all 650ms cubic-bezier(.2,.9,.32,1)}
+    .in-view{opacity:1;transform:translateY(0)}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .stats{order:2}
+      .chart{order:1}
+      .sections{grid-template-columns:1fr}
+      .hero-stat{flex-direction:column;gap:8px;align-items:flex-start}
+      .region-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:600px){
+      .region-grid{grid-template-columns:1fr}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">LB</div>
+        <div>
+          <h1>Lebanon — Conflict Impact Summary</h1>
+          <p class="lead">Concise data snapshot (spring 2025) — returns, damage, livelihoods, and social impact.</p>
+        </div>
+      </div>
+      <div class="pill">Updated: Spring 2025</div>
+    </header>
+
+    <div class="grid">
+      <div class="stats fade-up" data-ro="true">
+        <div style="display:flex;align-items:center;justify-content:space-between;"> 
+          <div>
+            <div style="font-size:12px;color:var(--muted);">Returnees (IOM)</div>
+            <div class="num" id="num-return">0</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:var(--muted);">Remaining displaced</div>
+            <div class="num" id="num-displaced">0</div>
+          </div>
+        </div>
+        <div style="height:12px"></div>
+        <div class="stat">
+          <div>
+            <div class="num" id="early-jan-return">0</div>
+            <div class="label">Early Jan 2025 — returned</div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div class="num" id="early-jan-rem">0</div>
+            <div class="label">Early Jan 2025 — remaining displaced</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div>
+            <div class="num" id="march-return">0</div>
+            <div class="label">Mar 7, 2025 — returned</div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div class="num" id="march-rem">0</div>
+            <div class="label">Mar 7, 2025 — remaining displaced</div>
+          </div>
+        </div>
+        <div class="stat">
+          <div>
+            <div class="num" id="april-return">0</div>
+            <div class="label">Apr 30, 2025 — returned</div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div class="num" id="april-rem">0</div>
+            <div class="label">Apr 30, 2025 — remaining displaced</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart fade-up" data-ro="true">
+        <div class="timeline">
+          <div class="time-card">
+            <h3>Early January 2025</h3>
+            <p class="muted">~869,000 returned; ~115,000 still displaced (incl. ~3,800 in collective sites).</p>
+          </div>
+          <div class="time-card">
+            <h3>March 7, 2025</h3>
+            <p class="muted">~954,000 returned; ~96,000 still displaced.</p>
+          </div>
+          <div class="time-card">
+            <h3>April 30, 2025</h3>
+            <p class="muted">~970,000 returned; ~90,000 still displaced.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stat fade-up" data-ro="true">
+        <div>
+          <div class="big" id="spring-return">0</div>
+          <div class="sub">Returned by Spring 2025</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700">90,000–120,000</div>
+          <div class="sub">Estimated remaining displaced</div>
+        </div>
+      </div>
+
+      <div class="sections" style="grid-column:1 / span 12">
+        <div class="card fade-up" data-ro="true">
+          <h4>Economic Loss & Infrastructure</h4>
+          <ul>
+            <li>US $5.1 billion in economic losses (Oct 2023–Oct 2024).</li>
+            <li>US $3.4 billion in physical infrastructure damage.</li>
+            <li>Combined impact ≈ US $8.5 billion.</li>
+            <li>Housing: >99,000 units damaged; cost ≈ US $2.8 billion.</li>
+            <li>Real GDP contracted by at least 6.6% in 2024.</li>
+          </ul>
+        </div>
+
+        <div class="card fade-up" data-ro="true">
+          <h4>Sector-Specific Damage</h4>
+          <ul>
+            <li>Agriculture: farmland, crops, and livestock destroyed (south hardest hit).</li>
+            <li>Commerce: 14,748 business units damaged; many shops closed.</li>
+            <li>Tourism: major collapse near conflict areas.</li>
+            <li>Employment: private sector -~25% overall; ~36% in hardest-hit regions.</li>
+          </ul>
+        </div>
+
+        <div class="card fade-up" data-ro="true">
+          <h4>Food Insecurity & Social Impact</h4>
+          <ul>
+            <li>Food insecurity increased due to agricultural loss and supply disruptions.</li>
+            <li>Loss of livelihoods in agriculture, tourism, and commerce; unemployment spiked.</li>
+            <li>Social disruption: displacement, damaged schools used as shelters, strained community structures.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NEW: Displaced People by Region Section -->
+      <div class="displaced-regions fade-up" data-ro="true">
+        <h2>Displaced Population by Region (Spring 2025)</h2>
+        
+        <div class="region-group">
+          <div class="region-group-title">South Lebanon</div>
+          <div class="region-grid" id="south-regions">
+            <!-- South regions will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-group-title">El Bekaa</div>
+          <div class="region-grid" id="bekaa-regions">
+            <!-- Bekaa regions will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="region-group">
+          <div class="region-group-title">Beirut & Mount Lebanon</div>
+          <div class="region-grid" id="other-regions">
+            <!-- Other regions will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <div class="region-total">
+          Total Displaced Shown:
+          <div class="total-value" id="total-displaced">0</div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer class="fade-up" data-ro="true">
+      Data sources: IOM, DTM, World Bank, UN agencies, UNDP, UNESCWA, OCHA. (Summary for web presentation.)
+    </footer>
+  </div>
+
+  <script>
+    // Data (numbers) — use integer values for counters
+    const DATA = {
+      earlyJanReturned: 869000,
+      earlyJanRemaining: 115000,
+      marchReturned: 954000,
+      marchRemaining: 96000,
+      aprilReturned: 970000,
+      aprilRemaining: 90000,
+      springReturned: 970000,
+      
+      // New displaced people data by region
+      displacedByRegion: [
+        // South Lebanon
+        { region: "Saida", value: 13685, group: "south" },
+        { region: "Sour", value: 25239, group: "south" },
+        { region: "Jezzine", value: 102, group: "south" },
+        { region: "Bent Jebeil", value: 6271, group: "south" },
+        { region: "Nabatieh", value: 22817, group: "south" },
+        { region: "Marjayoun", value: 1889, group: "south" },
+        { region: "Hasbaya", value: 1203, group: "south" },
+        
+        // El Bekaa
+        { region: "Zahle", value: 377, group: "bekaa" },
+        { region: "Rachaya", value: 339, group: "bekaa" },
+        { region: "West Bekaa", value: 46, group: "bekaa" },
+        
+        // Beirut & Mount Lebanon
+        { region: "Beirut", value: 4954, group: "other" },
+        { region: "Chouf", value: 4592, group: "other" },
+        { region: "Al Metn", value: 4385, group: "other" },
+        { region: "Baabda", value: 3081, group: "other" },
+        { region: "Aley", value: 8633, group: "other" }
+      ]
+    }
+
+    // Simple count-up function
+    function countUp(el, to, duration=1200){
+      const start = 0;
+      const range = to - start;
+      const startTime = performance.now();
+      function step(now){
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const eased = t*(2-t); // ease-out
+        const val = Math.floor(start + eased * range);
+        el.textContent = val.toLocaleString();
+        if(t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Function to create region cards
+    function createRegionCards() {
+      const southContainer = document.getElementById('south-regions');
+      const bekaaContainer = document.getElementById('bekaa-regions');
+      const otherContainer = document.getElementById('other-regions');
+      
+      let totalDisplaced = 0;
+      
+      DATA.displacedByRegion.forEach(item => {
+        totalDisplaced += item.value;
+        
+        const card = document.createElement('div');
+        card.className = 'region-card';
+        card.innerHTML = `
+          <div class="region-name">${item.region}</div>
+          <div class="region-value" data-value="${item.value}">0</div>
+        `;
+        
+        switch(item.group) {
+          case 'south':
+            southContainer.appendChild(card);
+            break;
+          case 'bekaa':
+            bekaaContainer.appendChild(card);
+            break;
+          case 'other':
+            otherContainer.appendChild(card);
+            break;
+        }
+      });
+      
+      // Set total displaced
+      document.getElementById('total-displaced').textContent = totalDisplaced.toLocaleString();
+    }
+
+    // Animate region cards with staggered delay
+    function animateRegionCards() {
+      const cards = document.querySelectorAll('.region-card');
+      cards.forEach((card, index) => {
+        // Staggered animation with delay
+        setTimeout(() => {
+          card.classList.add('visible');
+          
+          // Animate the number inside
+          const valueEl = card.querySelector('.region-value');
+          const value = parseInt(valueEl.getAttribute('data-value'));
+          countUp(valueEl, value, 800);
+          
+        }, 100 + (index * 80)); // 80ms delay between each card
+      });
+    }
+
+    // populate elements
+    document.getElementById('early-jan-return').textContent = '0';
+    document.getElementById('early-jan-rem').textContent = '0';
+    document.getElementById('march-return').textContent = '0';
+    document.getElementById('march-rem').textContent = '0';
+    document.getElementById('april-return').textContent = '0';
+    document.getElementById('april-rem').textContent = '0';
+    document.getElementById('num-return').textContent = '0';
+    document.getElementById('num-displaced').textContent = '0';
+    document.getElementById('spring-return').textContent = '0';
+    
+    // Create region cards
+    createRegionCards();
+
+    // IntersectionObserver to reveal and animate when in view
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        const el = entry.target;
+        if(entry.isIntersecting){
+          el.classList.add('in-view');
+          if(el.dataset.ro === 'true'){
+            // when stats container appears, start counters
+            if(el.classList.contains('stats') || el.classList.contains('hero-stat') || el.classList.contains('chart')){
+              // animate counters
+              countUp(document.getElementById('early-jan-return'), DATA.earlyJanReturned, 5000);
+              countUp(document.getElementById('early-jan-rem'), DATA.earlyJanRemaining, 5000);
+              countUp(document.getElementById('march-return'), DATA.marchReturned, 5000);
+              countUp(document.getElementById('march-rem'), DATA.marchRemaining, 5000);
+              countUp(document.getElementById('april-return'), DATA.aprilReturned, 5000);
+              countUp(document.getElementById('april-rem'), DATA.aprilRemaining, 5000);
+              countUp(document.getElementById('num-return'), DATA.springReturned, 7000);
+              countUp(document.getElementById('num-displaced'), 100000, 4800);
+              countUp(document.getElementById('spring-return'), DATA.springReturned, 7000);
+            }
+            
+            // When displaced regions section appears
+            if(el.classList.contains('displaced-regions')) {
+              setTimeout(animateRegionCards, 300);
+            }
+          }
+          io.unobserve(el);
+        }
+      })
+    },{threshold:0.12});
+
+    document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+    // make entire page keyboard accessible: focus outline
+    document.addEventListener('keyup', e=>{
+      if(e.key === 'Tab') document.documentElement.style.scrollBehavior='smooth';
+    })
+  </script>
+</body>
+</html>
