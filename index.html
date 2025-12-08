@@ -383,6 +383,162 @@
       font-weight: 600;
     }
 
+    /* NEW: Methodology & Rates Section */
+    .methodology {
+      grid-column: 1 / span 12;
+      margin-top: 32px;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(110, 231, 183, 0.05), rgba(110, 231, 183, 0.02));
+      border: 1px solid rgba(110, 231, 183, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .methodology::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent1), transparent);
+    }
+    .methodology h2 {
+      margin: 0 0 24px 0;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent1);
+    }
+    .methodology h2::before {
+      content: '📊';
+      font-size: 18px;
+    }
+    
+    /* Formula Box */
+    .formula-box {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 0px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .formula-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .formula-box:hover {
+      transform: translateY(-5px);
+      background: rgba(110, 231, 183, 0.08);
+      border-color: rgba(110, 231, 183, 0.2);
+    }
+    .formula-title {
+      font-size: 15px;
+      color: var(--accent1);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .formula-title::before {
+      content: 'Σ';
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    /* Formula Layout */
+    .formula-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .formula-equation {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: 'Inter', monospace;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .fraction {
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 8px;
+    }
+    .numerator {
+      display: block;
+      padding: 2px 12px;
+      border-bottom: 2px solid var(--accent1);
+    }
+    .denominator {
+      display: block;
+      padding: 2px 12px;
+    }
+    .formula-equals {
+      font-size: 24px;
+      color: var(--accent1);
+      font-weight: bold;
+      margin: 0 10px;
+    }
+    .formula-result {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent1);
+      padding: 8px 16px;
+      background: rgba(110, 231, 183, 0.1);
+      border-radius: 8px;
+      border: 1px solid rgba(110, 231, 183, 0.2);
+    }
+    .formula-interpretation {
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent1);
+    }
+    
+    /* Methodology Grid */
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+
+    .multiply-k {
+      font-size: 14px;
+      color: var(--accent1);
+      margin-left: 8px;
+      font-weight: 600;
+      opacity: 0.9;
+      align-self: center;
+    }
+
+
     footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
 
     /* Animations */
@@ -400,6 +556,10 @@
       .death-stats-grid,
       .death-summary-grid,
       .key-stats-grid{grid-template-columns:1fr}
+      .methodology-grid{grid-template-columns:1fr; gap: 20px}
+      .formula-content{flex-direction:column;gap:12px}
+      .formula-equation{min-width: auto; width: 100%; flex-direction: column; gap: 6px}
+      .multiply-k{margin-left: 0; margin-top: 4px}
     }
     @media (max-width:600px){
       .region-grid{grid-template-columns:1fr}
@@ -528,7 +688,7 @@
         </div>
       </div>
 
-      <!-- NEW: Death Rates & Casualties Section -->
+      <!-- Death Rates & Casualties Section -->
       <div class="death-rates fade-up" data-ro="true">
         <h2>Casualties & Death Rates</h2>
         
@@ -603,7 +763,153 @@
         </div>
       </div>
 
+      <!-- NEW: Methodology & Rates Section -->
+<div class="methodology fade-up" data-ro="true">
+  <h2>Methodology & Rates Calculation</h2>
+  
+  <div class="methodology-grid">
+    
+    <!-- Death Rate Formula -->
+    <div class="formula-box" id="death-rate-formula">
+      <div class="formula-title">Death Rate (per 1,000)</div>
+      <div class="formula-content">
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">Number of deaths</span>
+            <span class="denominator">Total population</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">3,583</span>
+            <span class="denominator">4,800,000</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-result" data-value="0.746">0.746</div>
+      </div>
+      <div class="formula-interpretation">
+        <strong>Interpretation:</strong> In 2024, the death rate in Lebanon was 0.746 per 1,000 residents.
+      </div>
     </div>
+    
+    <!-- Total Displacement Rate Formula -->
+    <div class="formula-box" id="total-displacement-formula">
+      <div class="formula-title">Total Displacement Rate (per 1,000)</div>
+      <div class="formula-content">
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">Total displaced people</span>
+            <span class="denominator">Total population</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">97,613</span>
+            <span class="denominator">4,800,000</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-result" data-value="20.33">20.33</div>
+      </div>
+      <div class="formula-interpretation">
+        <strong>Interpretation:</strong> In 2024, the Lebanese displacement rate was 20.33 per 1,000 residents.
+      </div>
+    </div>
+    
+    <!-- Beirut & Mount Lebanon Displacement Rate -->
+    <div class="formula-box" id="beirut-displacement-formula">
+      <div class="formula-title">Beirut & Mount Lebanon Displacement Rate (per 1,000)</div>
+      <div class="formula-content">
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">Displaced people (Beirut & Mount Lebanon)</span>
+            <span class="denominator">Total population</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">25,645</span>
+            <span class="denominator">4,800,000</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-result" data-value="5.34">5.34</div>
+      </div>
+      <div class="formula-interpretation">
+        <strong>Interpretation:</strong> In 2024, the displacement rate for Beirut and Mount Lebanon district was 5.34 per 1,000 residents.
+      </div>
+    </div>
+    
+    <!-- Bekaa Displacement Rate -->
+    <div class="formula-box" id="bekaa-displacement-formula">
+      <div class="formula-title">Bekaa District Displacement Rate (per 1,000)</div>
+      <div class="formula-content">
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">Displaced people (Bekaa)</span>
+            <span class="denominator">Total population</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">762</span>
+            <span class="denominator">4,800,000</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-result" data-value="0.15">0.15</div>
+      </div>
+      <div class="formula-interpretation">
+        <strong>Interpretation:</strong> In 2024, the displacement rate for the Bekaa district was 0.15 per 1,000 residents.
+      </div>
+    </div>
+    
+    <!-- South Lebanon Displacement Rate -->
+    <div class="formula-box" id="south-displacement-formula">
+      <div class="formula-title">South Lebanon District Displacement Rate (per 1,000)</div>
+      <div class="formula-content">
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">Displaced people (South Lebanon)</span>
+            <span class="denominator">Total population</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-equation">
+          <span class="fraction">
+            <span class="numerator">71,206</span>
+            <span class="denominator">4,800,000</span>
+          </span>
+          <span class="multiply-k">× 1,000</span>
+        </div>
+        <span class="formula-equals">=</span>
+        <div class="formula-result" data-value="14.83">14.83</div>
+      </div>
+      <div class="formula-interpretation">
+        <strong>Interpretation:</strong> In 2024, the displacement rate for the South Lebanon district was 14.83 per 1,000 residents.
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="formula-interpretation" style="margin-top: 20px; background: rgba(255,255,255,0.03);">
+    <strong>Methodology Note:</strong> Rates are calculated per 1,000 residents using Lebanon's estimated population of 4,800,000. The death rate uses total reported deaths (3,583), while displacement rates use region-specific displacement data from spring 2025. This standardization allows for comparative analysis across regions.
+  </div>
+</div>
 
     <footer class="fade-up" data-ro="true">
       Data sources: IOM, DTM, World Bank, UN agencies, UNDP, UNESCWA, OCHA, Lebanese Ministry of Health, IDF reports, Hezbollah statements, CNN. (Summary for web presentation.)
@@ -667,6 +973,21 @@
         childrenKilled: 231,
         hezbollahSelfReportedKilled: 5000,
         hezbollahSelfReportedWounded: 13000
+      },
+      
+      // Methodology data
+      methodology: {
+        totalPopulation: 4800000,
+        totalDeaths: 3583,
+        totalDisplaced: 97613,
+        beirutDisplaced: 25645,
+        bekaaDisplaced: 762,
+        southDisplaced: 71206,
+        deathRate: 0.746,
+        totalDisplacementRate: 20.33,
+        beirutDisplacementRate: 5.34,
+        bekaaDisplacementRate: 0.15,
+        southDisplacementRate: 14.83
       }
     }
 
@@ -681,6 +1002,30 @@
         const eased = t*(2-t); // ease-out
         const val = Math.floor(start + eased * range);
         el.textContent = val.toLocaleString();
+        if(t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    
+    // Count-up for decimal numbers (rates)
+    function countUpDecimal(el, to, duration=1200) {
+      const start = 0;
+      const range = to - start;
+      const startTime = performance.now();
+      
+      function step(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(1, elapsed / duration);
+        const eased = t*(2-t); // ease-out
+        const val = start + eased * range;
+        
+        // Format to 2 decimal places
+        if (to < 10) {
+          el.textContent = val.toFixed(3);
+        } else {
+          el.textContent = val.toFixed(2);
+        }
+        
         if(t < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
@@ -741,6 +1086,21 @@
           <div class="key-stat-label">${stat.label}</div>
         `;
         container.appendChild(statEl);
+      });
+    }
+    
+    // Animate methodology formulas
+    function animateMethodology() {
+      const formulaBoxes = document.querySelectorAll('.formula-box');
+      formulaBoxes.forEach((box, index) => {
+        setTimeout(() => {
+          box.classList.add('visible');
+          
+          // Animate the result numbers
+          const resultEl = box.querySelector('.formula-result');
+          const value = parseFloat(resultEl.getAttribute('data-value'));
+          countUpDecimal(resultEl, value, 1000);
+        }, 200 + (index * 300));
       });
     }
 
@@ -850,6 +1210,11 @@
             // When death rates section appears
             if(el.classList.contains('death-rates')) {
               setTimeout(animateDeathRates, 300);
+            }
+            
+            // When methodology section appears
+            if(el.classList.contains('methodology')) {
+              setTimeout(animateMethodology, 300);
             }
           }
           io.unobserve(el);
