@@ -628,7 +628,25 @@
     }
 
 
-    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
+    footer {
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  
+  /* Make it wide and fit the website */
+  width: 100vw; /* Use viewport width */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -23vw;
+  margin-right: -50vw;
+  padding: 24px 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  box-sizing: border-box;
+}
 
     /* Animations */
     .fade-up{opacity:0;transform:translateY(12px);transition:all 650ms cubic-bezier(.2,.9,.32,1)}
@@ -886,7 +904,7 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">Number of deaths</span>
-            <span class="denominator">Total population</span>
+            <span class="denominator">Mid-year population</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
@@ -894,15 +912,18 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">3,583</span>
-            <span class="denominator">4,800,000</span>
+            <span class="denominator">5,555,000</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
         <span class="formula-equals">=</span>
-        <div class="formula-result" data-value="0.746">0.746</div>
+        <div class="formula-result" data-value="0.645">0.645</div>
       </div>
       <div class="formula-interpretation">
-        <strong>Interpretation:</strong> In 2024, the death rate in Lebanon was 0.746 per 1,000 residents.
+        <strong>Interpretation:</strong> In 2024, the death rate in Lebanon was 0.645 per 1,000 residents.
+        <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+          <em>Note: Mid-year population (5.555 million) calculated from datareportal.com data (Jan 2024: 5.28M, Jan 2025: 5.83M).</em>
+        </div>
       </div>
     </div>
     
@@ -913,7 +934,7 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">Total displaced people</span>
-            <span class="denominator">Total population</span>
+            <span class="denominator">Mid-year population</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
@@ -921,15 +942,18 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">97,613</span>
-            <span class="denominator">4,800,000</span>
+            <span class="denominator">5,555,000</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
         <span class="formula-equals">=</span>
-        <div class="formula-result" data-value="20.33">20.33</div>
+        <div class="formula-result" data-value="17.57">17.57</div>
       </div>
       <div class="formula-interpretation">
-        <strong>Interpretation:</strong> In 2024, the Lebanese displacement rate was 20.33 per 1,000 residents.
+        <strong>Interpretation:</strong> In 2024, the Lebanese displacement rate was 17.57 per 1,000 residents.
+        <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+          <em>Note: Mid-year population (5.555 million) calculated from datareportal.com data (Jan 2024: 5.28M, Jan 2025: 5.83M).</em>
+        </div>
       </div>
     </div>
     
@@ -940,7 +964,7 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">Displaced people (Beirut & Mount Lebanon)</span>
-            <span class="denominator">Total population</span>
+            <span class="denominator">Mid-year population</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
@@ -948,15 +972,18 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">25,645</span>
-            <span class="denominator">4,800,000</span>
+            <span class="denominator">5,555,000</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
         <span class="formula-equals">=</span>
-        <div class="formula-result" data-value="5.34">5.34</div>
+        <div class="formula-result" data-value="4.62">4.62</div>
       </div>
       <div class="formula-interpretation">
-        <strong>Interpretation:</strong> In 2024, the displacement rate for Beirut and Mount Lebanon district was 5.34 per 1,000 residents.
+        <strong>Interpretation:</strong> In 2024, the displacement rate for Beirut and Mount Lebanon district was 4.62 per 1,000 residents.
+        <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+          <em>Note: Mid-year population (5.555 million) calculated from datareportal.com data (Jan 2024: 5.28M, Jan 2025: 5.83M).</em>
+        </div>
       </div>
     </div>
     
@@ -967,7 +994,7 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">Displaced people (Bekaa)</span>
-            <span class="denominator">Total population</span>
+            <span class="denominator">Mid-year population</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
@@ -975,15 +1002,18 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">762</span>
-            <span class="denominator">4,800,000</span>
+            <span class="denominator">5,555,000</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
         <span class="formula-equals">=</span>
-        <div class="formula-result" data-value="0.15">0.15</div>
+        <div class="formula-result" data-value="0.14">0.14</div>
       </div>
       <div class="formula-interpretation">
-        <strong>Interpretation:</strong> In 2024, the displacement rate for the Bekaa district was 0.15 per 1,000 residents.
+        <strong>Interpretation:</strong> In 2024, the displacement rate for the Bekaa district was 0.14 per 1,000 residents.
+        <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+          <em>Note: Mid-year population (5.555 million) calculated from datareportal.com data (Jan 2024: 5.28M, Jan 2025: 5.83M).</em>
+        </div>
       </div>
     </div>
     
@@ -994,7 +1024,7 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">Displaced people (South Lebanon)</span>
-            <span class="denominator">Total population</span>
+            <span class="denominator">Mid-year population</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
@@ -1002,27 +1032,30 @@
         <div class="formula-equation">
           <span class="fraction">
             <span class="numerator">71,206</span>
-            <span class="denominator">4,800,000</span>
+            <span class="denominator">5,555,000</span>
           </span>
           <span class="multiply-k">× 1,000</span>
         </div>
         <span class="formula-equals">=</span>
-        <div class="formula-result" data-value="14.83">14.83</div>
+        <div class="formula-result" data-value="12.82">12.82</div>
       </div>
       <div class="formula-interpretation">
-        <strong>Interpretation:</strong> In 2024, the displacement rate for the South Lebanon district was 14.83 per 1,000 residents.
+        <strong>Interpretation:</strong> In 2024, the displacement rate for the South Lebanon district was 12.82 per 1,000 residents.
+        <div style="margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.6);">
+          <em>Note: Mid-year population (5.555 million) calculated from datareportal.com data (Jan 2024: 5.28M, Jan 2025: 5.83M).</em>
+        </div>
       </div>
     </div>
     
   </div>
   
   <div class="formula-interpretation" style="margin-top: 20px; background: rgba(255,255,255,0.03);">
-    <strong>Methodology Note:</strong> Rates are calculated per 1,000 residents using Lebanon's estimated population of 4,800,000. The death rate uses total reported deaths (3,583), while displacement rates use region-specific displacement data from spring 2025. This standardization allows for comparative analysis across regions.
+    <strong>Methodology Note:</strong> Rates are calculated per 1,000 residents using Lebanon's estimated mid-year population of 5,555,000 (calculated from datareportal.com: January 2024: 5.28M, January 2025: 5.83M). The death rate uses total reported deaths (3,583), while displacement rates use region-specific displacement data from spring 2025. This standardization allows for comparative analysis across regions.
   </div>
 </div>
 
     <footer class="fade-up" data-ro="true">
-      Data sources: IOM, DTM, World Bank, UN agencies, UNDP, UNESCWA, OCHA, Lebanese Ministry of Health, IDF reports, Hezbollah statements, CNN.
+      Data sources: IOM, DTM, World Bank, UN agencies, UNDP, UNESCWA, OCHA, Lebanese Ministry of Health, IDF reports, Hezbollah statements, CNN. Population data: datareportal.com.
     </footer>
   </div>
 
@@ -1085,19 +1118,19 @@
         hezbollahSelfReportedWounded: 13000
       },
       
-      // Methodology data
+      // Updated Methodology data with mid-year population
       methodology: {
-        totalPopulation: 4800000,
+        midYearPopulation: 5555000, // Calculated from datareportal.com: (5.28M + 5.83M) / 2
         totalDeaths: 3583,
         totalDisplaced: 97613,
         beirutDisplaced: 25645,
         bekaaDisplaced: 762,
         southDisplaced: 71206,
-        deathRate: 0.746,
-        totalDisplacementRate: 20.33,
-        beirutDisplacementRate: 5.34,
-        bekaaDisplacementRate: 0.15,
-        southDisplacementRate: 14.83
+        deathRate: 0.645, // 3,583 / 5,555,000 * 1,000
+        totalDisplacementRate: 17.57, // 97,613 / 5,555,000 * 1,000
+        beirutDisplacementRate: 4.62, // 25,645 / 5,555,000 * 1,000
+        bekaaDisplacementRate: 0.14, // 762 / 5,555,000 * 1,000
+        southDisplacementRate: 12.82 // 71,206 / 5,555,000 * 1,000
       }
     }
 
